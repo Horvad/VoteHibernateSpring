@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id = "artistService" class="by.it_academy.MDK29522.service.ArtistService" primary="true">
+        <constructor-arg index="0" ref="artistDaoDB"></constructor-arg>
+    </bean>
+    <bean id = "genreService" class="by.it_academy.MDK29522.service.GenreService" primary="true">
+        <constructor-arg index="0" ref="genreDaoDB"></constructor-arg>
+    </bean>
+    <bean id = "statisticService" class="by.it_academy.MDK29522.service.StatisticService" primary="true">
+        <constructor-arg index="0" ref="voteService"></constructor-arg>
+        <constructor-arg index="1" ref="genreService"></constructor-arg>
+        <constructor-arg index="2" ref="artistService"></constructor-arg>
+    </bean>
+
+    <bean id = "voteService" class="by.it_academy.MDK29522.service.VoteService" primary="true">
+        <constructor-arg index="0" ref="genreService"></constructor-arg>
+        <constructor-arg index="1" ref="artistService"></constructor-arg>
+        <constructor-arg index="2" ref="voteDaoDB"></constructor-arg>
+    </bean>
+
+    <bean id = "artistDaoDB" class="by.it_academy.MDK29522.dao.database.ArtistDaoDB" primary="true">
+        <constructor-arg index="0" ref="manager"></constructor-arg>
+    </bean>
+    <bean id = "genreDaoDB" class="by.it_academy.MDK29522.dao.database.GenreDaoDB" primary="true">
+        <constructor-arg index="0" ref="manager"/>
+    </bean>
+    <bean id = "voteDaoDB" class="by.it_academy.MDK29522.dao.database.VoteDaoDB" primary="true">
+        <constructor-arg index="0" ref="manager"/>
+    </bean>
+    <bean id = "manager" class="by.it_academy.MDK29522.dao.support.Manager">
+    </bean>
+</beans>
